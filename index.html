@@ -1,1 +1,262 @@
-<h1>Hello World!</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Renan Simas | Analista de Sistemas</title>
+<meta name="description" content="Portfólio de Renan Simas: certificações, projetos e publicações.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ember:#c23f45;      /* vermelho do degradê */
+  --moss:#161f0e;       /* verde escuro do degradê */
+  --ink:#f6efe9;
+  --muted:#d2c3bb;
+  --glow:#ff7a6b;
+  --lime:#a9e66b;
+  --glass:rgba(12,16,8,.42);
+  --line:rgba(255,255,255,.16);
+  --display:"Unbounded","Trebuchet MS",sans-serif;
+  --body:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{
+  font-family:var(--body);color:var(--ink);line-height:1.6;
+  background:linear-gradient(90deg,var(--ember) 0%,#6b2f2b 45%,var(--moss) 100%) fixed;
+  padding:clamp(12px,3vw,40px);
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+
+.shell{
+  max-width:1180px;margin:0 auto;min-height:calc(100vh - clamp(24px,6vw,80px));
+  display:grid;grid-template-columns:320px 1fr;gap:clamp(16px,2.4vw,32px);align-items:start;
+}
+
+/* Painel lateral */
+.profile{
+  position:sticky;top:clamp(12px,3vw,40px);
+  background:var(--glass);border:1px solid var(--line);border-radius:44px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  padding:32px 24px 28px;text-align:center;
+}
+.avatar{
+  width:156px;height:156px;margin:0 auto 22px;border-radius:50%;position:relative;
+  display:grid;place-items:center;overflow:hidden;
+  background:linear-gradient(135deg,var(--ember),var(--moss));
+  box-shadow:0 0 0 3px var(--line),0 0 38px rgba(255,122,107,.35);
+  font-family:var(--display);font-weight:800;font-size:2.4rem;
+}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.profile h1{font-family:var(--display);font-weight:600;font-size:1.35rem;line-height:1.2}
+.role{margin-top:6px;color:var(--muted);font-size:.95rem}
+.facts{margin-top:22px;text-align:left;border:1px solid var(--line);border-radius:18px;padding:16px 18px;background:rgba(0,0,0,.2)}
+.facts dt{font-size:.8rem;color:var(--lime);font-weight:700}
+.facts dd{font-size:.95rem;margin-bottom:12px}
+.facts dd:last-child{margin-bottom:0}
+.links{display:flex;gap:10px;margin-top:18px}
+.links a{
+  flex:1;text-decoration:none;font-weight:700;font-size:.9rem;padding:10px 12px;
+  border:1px solid var(--line);border-radius:14px;transition:background .2s,border-color .2s;
+}
+.links a:hover{background:rgba(255,255,255,.1);border-color:var(--glow)}
+
+/* Painel principal */
+.main{min-width:0}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:0 6px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  font:600 .95rem var(--body);color:var(--muted);cursor:pointer;white-space:nowrap;
+  background:var(--glass);border:1px solid var(--line);border-bottom:none;
+  padding:12px 24px;border-radius:16px 16px 0 0;transition:color .2s,background .2s;
+}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);background:rgba(12,16,8,.62);box-shadow:inset 0 3px 0 var(--glow)}
+.panel{
+  background:rgba(12,16,8,.62);border:1px solid var(--line);border-radius:0 28px 28px 28px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  padding:clamp(20px,3vw,36px);min-height:560px;
+}
+.panel[hidden]{display:none}
+.panel h2{font-family:var(--display);font-weight:600;font-size:1.15rem;margin-bottom:4px}
+.panel .sub{color:var(--muted);font-size:.92rem;margin-bottom:28px}
+
+/* Vitrine de medalhas */
+.medals{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:26px 18px}
+.medal{display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none;gap:10px}
+.hex{
+  width:112px;aspect-ratio:1/1.1547;position:relative;display:grid;place-items:center;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+  background:linear-gradient(160deg,var(--glow),var(--ember) 45%,var(--lime));
+  transition:transform .25s,filter .25s;
+}
+.hex::before{
+  content:"";position:absolute;inset:3px;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+  background:linear-gradient(160deg,#2a1a17,var(--moss));
+}
+.hex span{position:relative;font-family:var(--display);font-weight:800;font-size:1.5rem;color:var(--ink)}
+.medal:hover .hex{transform:translateY(-6px) rotate(-3deg);filter:drop-shadow(0 8px 16px rgba(255,122,107,.55))}
+.medal strong{font-size:.92rem;line-height:1.3}
+.medal small{color:var(--muted);font-size:.8rem}
+
+/* Projetos e publicações */
+.list{display:grid;gap:16px}
+.item{
+  display:grid;gap:6px;padding:20px 22px;border:1px solid var(--line);border-radius:18px;
+  background:rgba(255,255,255,.04);transition:border-color .2s,background .2s;
+}
+.item:hover{border-color:var(--glow);background:rgba(255,255,255,.07)}
+.item h3{font-family:var(--display);font-weight:600;font-size:1rem}
+.item p{color:var(--muted);font-size:.95rem;max-width:68ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.tags span{font-size:.78rem;padding:3px 11px;border-radius:99px;border:1px solid var(--lime);color:var(--lime)}
+.item .go{justify-self:start;margin-top:6px;font-weight:700;font-size:.9rem;color:var(--ink);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--glow)}
+.empty{color:var(--muted)}
+
+/* Uma única animação de entrada */
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.medal{animation:rise .5s both;animation-delay:calc(var(--i)*70ms)}
+
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .profile{position:static;border-radius:32px}
+  .panel{border-radius:0 0 24px 24px;min-height:0}
+  .tabs{padding:0}
+  .tab{padding:11px 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  .medal{animation:none}
+  .hex,.tab,.item,.links a{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="profile">
+    <div class="avatar">
+      RS
+      <!-- Quando tiver a foto, salve como "foto.jpg" na raiz do repositório -->
+      <img src="foto.jpg" alt="Foto de Renan Simas" onerror="this.remove()">
+    </div>
+    <h1>Renan Simas</h1>
+    <p class="role">Analista de Sistemas</p>
+
+    <dl class="facts">
+      <dt>Empresa</dt>
+      <dd>IWS Sistemas</dd>
+      <dt>Formação</dt>
+      <dd>Sistemas de Informação, FEPI</dd>
+    </dl>
+
+    <div class="links">
+      <!-- Troque os endereços abaixo pelos seus -->
+      <a href="https://www.linkedin.com/in/SEU-PERFIL" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/SEU-USUARIO" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="tabs" role="tablist" aria-label="Seções do portfólio">
+      <button class="tab" role="tab" id="t-cert" aria-controls="p-cert" aria-selected="true">Certificações</button>
+      <button class="tab" role="tab" id="t-proj" aria-controls="p-proj" aria-selected="false" tabindex="-1">Projetos</button>
+      <button class="tab" role="tab" id="t-pub"  aria-controls="p-pub"  aria-selected="false" tabindex="-1">Publicações</button>
+    </div>
+
+    <section class="panel" id="p-cert" role="tabpanel" aria-labelledby="t-cert">
+      <h2>Certificações</h2>
+      <p class="sub">Cada medalha leva à página de verificação da certificação.</p>
+      <div class="medals" id="medals"></div>
+    </section>
+
+    <section class="panel" id="p-proj" role="tabpanel" aria-labelledby="t-proj" hidden>
+      <h2>Projetos</h2>
+      <p class="sub">Código aberto e trabalhos que desenvolvi.</p>
+      <div class="list" id="projects"></div>
+    </section>
+
+    <section class="panel" id="p-pub" role="tabpanel" aria-labelledby="t-pub" hidden>
+      <h2>Publicações</h2>
+      <p class="sub">Artigos, trabalhos acadêmicos e pesquisas.</p>
+      <div class="list" id="pubs"></div>
+    </section>
+  </main>
+</div>
+
+<script>
+/* ===== EDITE AQUI SEU CONTEÚDO =====
+   Os itens abaixo são exemplos. Troque, apague ou adicione quantos quiser. */
+
+const certificacoes = [
+  { nome: "Nome da certificação", emissor: "Instituição", ano: "2025", link: "#" },
+  { nome: "Outra certificação",   emissor: "Instituição", ano: "2025", link: "#" },
+  { nome: "Mais uma certificação", emissor: "Instituição", ano: "2024", link: "#" }
+];
+
+const projetos = [
+  { nome: "Nome do projeto", descricao: "Descreva em uma ou duas frases o que o projeto faz e qual problema resolve.",
+    tecnologias: ["Python", "SQL"], repo: "#", demo: "" },
+  { nome: "Outro projeto", descricao: "Descrição curta do projeto.",
+    tecnologias: ["JavaScript", "HTML"], repo: "#", demo: "#" }
+];
+
+const publicacoes = [
+  /* Exemplo de formato (remova o comentário para usar):
+  { titulo: "Título da publicação", detalhe: "Evento ou revista, ano", resumo: "Resumo em uma frase.", link: "#" } */
+];
+
+/* ===== A PARTIR DAQUI NÃO PRECISA MEXER ===== */
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const iniciais = nome => nome.split(/\s+/).slice(0,2).map(p => p[0]).join("").toUpperCase();
+
+$("medals").innerHTML = certificacoes.map((c,i) => `
+  <a class="medal" style="--i:${i}" href="${esc(c.link)}" target="_blank" rel="noopener">
+    <div class="hex"><span>${esc(iniciais(c.nome))}</span></div>
+    <strong>${esc(c.nome)}</strong>
+    <small>${esc(c.emissor)}, ${esc(c.ano)}</small>
+  </a>`).join("");
+
+$("projects").innerHTML = projetos.map(p => `
+  <article class="item">
+    <h3>${esc(p.nome)}</h3>
+    <p>${esc(p.descricao)}</p>
+    <div class="tags">${p.tecnologias.map(t => `<span>${esc(t)}</span>`).join("")}</div>
+    <a class="go" href="${esc(p.repo)}" target="_blank" rel="noopener">Ver código</a>
+    ${p.demo ? `<a class="go" href="${esc(p.demo)}" target="_blank" rel="noopener">Ver demonstração</a>` : ""}
+  </article>`).join("");
+
+$("pubs").innerHTML = publicacoes.length ? publicacoes.map(p => `
+  <article class="item">
+    <h3>${esc(p.titulo)}</h3>
+    <p>${esc(p.detalhe)}</p>
+    <p>${esc(p.resumo)}</p>
+    <a class="go" href="${esc(p.link)}" target="_blank" rel="noopener">Ler publicação</a>
+  </article>`).join("") : `<p class="empty">As publicações vão aparecer aqui.</p>`;
+
+/* Abas */
+const tabs = [...document.querySelectorAll(".tab")];
+function abrir(tab){
+  tabs.forEach(t => {
+    const ativa = t === tab;
+    t.setAttribute("aria-selected", ativa);
+    t.tabIndex = ativa ? 0 : -1;
+    $(t.getAttribute("aria-controls")).hidden = !ativa;
+  });
+}
+tabs.forEach((t,i) => {
+  t.addEventListener("click", () => abrir(t));
+  t.addEventListener("keydown", e => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const prox = tabs[(i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length];
+    abrir(prox); prox.focus();
+  });
+});
+</script>
+</body>
+</html>
